@@ -6,12 +6,21 @@ import secondMainImg from "./../assets/secondMainImg.png";
 import { Button } from "@mui/material";
 import { FaGoogle } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
+import CircularProgress from "@mui/material/CircularProgress";  
 
 const Home = () => {
-  const { user } = useAuth();
+  const { user,loading } = useAuth();
+
+  if(loading){
+        return <div className='flex justify-center items-center h-screen'>
+            <CircularProgress size={80} />
+        </div>
+      
+  }
 
   return (
     <>
+       
       <Grid container spacing={2} className="h-full">
         <Grid className="flex justify-center align-center" size={8}>
           <Box className="text-center  flex flex-col justify-center items-left gap-8">

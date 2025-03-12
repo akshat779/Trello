@@ -14,14 +14,15 @@ const useBoardStore = create((set) => ({
     set({ boards });
   },
 
-  addBoard: async (title, userId) => {
+  addBoard: async (title, userId,color) => {
     const docRef = await addDoc(collection(db, "boards"), {
       title,
       createdAt: new Date(),
       userId,
+      color
     });
     set((state) => ({
-      boards: [...state.boards, { id: docRef.id, title, createdAt: new Date(), userId }],
+      boards: [...state.boards, { id: docRef.id, title, createdAt: new Date(), userId,color }],
     }));
   },
 
