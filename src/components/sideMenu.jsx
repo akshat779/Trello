@@ -61,7 +61,7 @@ export default function BasicMenu({userImage}) {
       </Menu>
         
 
-         <Toast open={toastOpen} setOpen={setToastOpen} message={"Logged Out"}/>
+         <Toast open={toastOpen} setOpen={setToastOpen} message={"Logging Out"}/>
 
     </div>
   );

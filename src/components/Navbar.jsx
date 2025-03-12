@@ -5,6 +5,7 @@ import { FaGoogle } from "react-icons/fa";
 import { Button } from "@mui/material";
 import BasicMenu from "./sideMenu";
 import TemporaryDrawer from "./Sidebar";
+import AddBoard from "./AddBoard";
 import { IoClipboardSharp } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 
@@ -24,7 +25,7 @@ const Navbar = () => {
         {user ? (
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <h2 className="text-xl font-bold">Add Board</h2>
+              <h2 className="text-xl font-bold">  <AddBoard /></h2>
               <IoAddSharp />
             </div>
 
