@@ -33,23 +33,7 @@ const Board = () => {
        
       </div>
 
-      <div className="mt-4 flex">
-        <input
-          type="text"
-          value={boardTitle}
-          onChange={(e) => setBoardTitle(e.target.value)}
-          placeholder="New board title"
-          className="border px-3 py-2 rounded w-full"
-        />
-        <input type="color" 
-        value={boardColor}
-        onChange={(e) => setBoardColor(e.target.value)}
-        className="border px-3 py-2 rounded ml-2"/>
-        <button onClick={handleAddBoard} className="bg-blue-500 text-white px-4 py-2 rounded ml-2">
-          Add
-        </button>
-      </div>
-
+      
       <div className="grid grid-cols-3 gap-4 mt-6">
         {boards.map((board) => (
           <div key={board.id} className="border p-4 rounded" style={{ backgroundColor: board.color }}>

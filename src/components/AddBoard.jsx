@@ -41,6 +41,11 @@ export default function AddBoard() {
         }
       };
 
+    const handleBoardAndClose = () => {
+        handleAddBoard();
+        handleClose();
+    }
+
   return (
     <div>
       <button className="text-xl" onClick={handleOpen}>Add Board</button>
@@ -79,12 +84,14 @@ export default function AddBoard() {
               <input
                 id="color"
                 type="color"
+                value={boardColor}
+                onChange={(e) => setBoardColor(e.target.value)}
                 className="border-2 border-gray-300 px-6 h-10 py-2 rounded w-full"
                 placeholder="Select a Color"
               />
             </div>
            
-              <Button variant="outlined"> Add Board</Button>
+              <Button variant="outlined" onClick={handleBoardAndClose} > Add Board</Button>
            
           </div>
         </Box>

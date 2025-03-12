@@ -24,16 +24,16 @@ const Home = () => {
       <Grid container spacing={2} className="h-full">
         <Grid className="flex justify-center align-center" size={8}>
           <Box className="text-center  flex flex-col justify-center items-left gap-8">
-            <Box className="flex flex-col gap-6 p-10 ">
+            <Box className="flex flex-col gap-10 p-10 ">
               <h1 className="text-4xl font-bold text-primaryText">
-                Capture, organize, and tackle your to-dos from anywhere.
+                Capture, organize, and tackle your <span className="text-5xl text-blue-900">"To-dos"</span> from anywhere.
               </h1>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-8">
                 <p className="text-2xl text-primaryText font-bold">
                   Escape the clutter and chaos—unleash your productivity with
                   Trello.
                 </p>
-                <p className="text-l text-primaryText font">
+                <p className="text-l text-primaryText font px-15">
                   Trello is a web-based, kanban-style, list-making application
                   developed by Atlassian. Created in 2011 by Fog Creek Software,
                   it was spun out to form the basis of a separate company in New

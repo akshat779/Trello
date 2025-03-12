@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { db } from "../firebase";
+import { db } from "./../context/firebase";
 import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
 
 const useListStore = create((set) => ({
