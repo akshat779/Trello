@@ -12,10 +12,10 @@ const Navbar = () => {
 
 
     return (
-        <nav className="p-4 flex justify-between bg-gray-800 text-white">
+        <nav className="p-4 flex justify-between border-b-2 border-gray-200 items-center">
             <div className="flex items-center gap-2">
-                <h1 className="text-xl font-bold">Trello Clone</h1>
-                <FaTrello className="text-2xl" />
+                <h1 className="text-xl font-bold text-textLogo">Trello Clone</h1>
+                <FaTrello className="text-2xl text-logo" />
             </div>
 
 
@@ -41,9 +41,9 @@ const Navbar = () => {
                         </Drawer> */}
                         {/* <Drawer /> */}
                         {/* <TemporaryDrawer /> */}
-                        <Button variant="outlined" size="" onClick={login} className="bg-gray-500 px-4 py-2 rounded flex items-center gap-2">
+                        <Button variant="outlined"  onClick={login} className="px-4 h-8 py-3 rounded flex justify-center items-center gap-2">
                             Login
-                            <FaGoogle className=" text-slate-300" />
+                            <FaGoogle className=" text-logo " />
                         </Button>
                     </>
 

@@ -1,4 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @import "tailwindcss";
+
+@theme{
+  --color-footer:rgb(23, 43, 77);
+  --color-textLogo: #253858;
+  --color-logo:#0b60da;
+  --color-primaryText:#091e42;
+  --font-roboto: "Roboto", sans-serif; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

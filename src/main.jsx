@@ -7,6 +7,7 @@ import Home from './pages/Home.jsx'
 import Board from './pages/Board.jsx'
 
 import './index.css'
+
 // import App from './App.jsx'
 const router = createBrowserRouter(
   createRoutesFromElements(
