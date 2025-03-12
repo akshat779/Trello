@@ -4,6 +4,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useAuth } from '../context/AuthContext';
 import Toast from './Toast';
+import { Link } from 'react-router-dom';
 
 
 export default function BasicMenu({userImage}) {
@@ -44,6 +45,7 @@ export default function BasicMenu({userImage}) {
       >
        <img src={userImage} alt="user" className="w-8 h-8 rounded-full" />
       </Button>
+    
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -53,9 +55,11 @@ export default function BasicMenu({userImage}) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
+       
+        <MenuItem  onClick={handleClose}><Link to="/profile" >Profile</Link></MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
+        
 
          <Toast open={toastOpen} setOpen={setToastOpen} message={"Logged Out"}/>
 

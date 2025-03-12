@@ -6,8 +6,9 @@ import Layout from './components/Layout.jsx'
 import Home from './pages/Home.jsx'
 import Board from './pages/Board.jsx'
 import PrivateRoute from './components/privateRoute.jsx'
-
+import Profile from './pages/Profile.jsx'
 import './index.css'
+
 
 
 // import App from './App.jsx'
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
     <Route path='/' element={<Layout />}>
       <Route path='' element={<Home />} />
       <Route path='board' element={<PrivateRoute element={<Board />}/>} />
+      <Route path='profile' element={<PrivateRoute element={<Profile />}/>} />
     </Route>
   )
 )
