@@ -23,9 +23,7 @@ const Board = () => {
     <div className="p-6">
       <div className="flex justify-between">
         <h1 className="text-2xl font-bold">Your Boards</h1>
-        <button onClick={logout} className="bg-red-500 text-white px-4 py-2 rounded">
-          Logout
-        </button>
+       
       </div>
 
       <div className="mt-4 flex">

@@ -5,53 +5,59 @@ import { FaGoogle } from "react-icons/fa";
 import { Button } from "@mui/material";
 import BasicMenu from "./sideMenu";
 import TemporaryDrawer from "./Sidebar";
-
+import { IoClipboardSharp } from "react-icons/io5";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
-    const { user, login, logout } = useAuth();
+  const { user, login, logout } = useAuth();
 
+  return (
+    <nav className="p-4 flex justify-between border-b-2 border-gray-200 items-center">
+      <NavLink to="/">
+        <div className="flex items-center gap-2">
+          <h1 className="text-xl font-bold text-textLogo">Trello Clone</h1>
+          <FaTrello className="text-2xl text-logo" />
+        </div>
+      </NavLink>
 
-    return (
-        <nav className="p-4 flex justify-between border-b-2 border-gray-200 items-center">
+      <div>
+        {user ? (
+          <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-                <h1 className="text-xl font-bold text-textLogo">Trello Clone</h1>
-                <FaTrello className="text-2xl text-logo" />
+              <h2 className="text-xl font-bold">Add Board</h2>
+              <IoAddSharp />
             </div>
 
+            <NavLink to="/board">
+              <div className="flex items-center gap-2">
+                <h2 className="text-xl font-bold">View Boards</h2>
+                <IoClipboardSharp />
+              </div>
+            </NavLink>
 
-            <div>
-
-                {user ? (
-
-                    <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-2">
-                            <h2 className="text-xl font-bold">Add Board</h2>
-                            <IoAddSharp />
-                        </div>
-                        <BasicMenu userImage={user?.photoURL} />
-
-                    </div>
-
-                ) : (
-
-                    <>
-                        {/* <Button onClick={toggleDrawer(true)}>Open drawer</Button>
+            <BasicMenu userImage={user?.photoURL} />
+          </div>
+        ) : (
+          <>
+            {/* <Button onClick={toggleDrawer(true)}>Open drawer</Button>
                         <Drawer open={open} onClose={toggleDrawer(false)}>
                             {DrawerList}
                         </Drawer> */}
-                        {/* <Drawer /> */}
-                        {/* <TemporaryDrawer /> */}
-                        <Button variant="outlined"  onClick={login} className="px-4 h-8 py-3 rounded flex justify-center items-center gap-2">
-                            Login
-                            <FaGoogle className=" text-logo " />
-                        </Button>
-                    </>
-
-                )}
-            </div>
-
-        </nav>
-    );
+            {/* <Drawer /> */}
+            {/* <TemporaryDrawer /> */}
+            <Button
+              variant="outlined"
+              onClick={login}
+              className="px-4 h-8 py-3 rounded flex justify-center items-center gap-2"
+            >
+              Login
+              <FaGoogle className=" text-logo " />
+            </Button>
+          </>
+        )}
+      </div>
+    </nav>
+  );
 };
 
 export default Navbar;
