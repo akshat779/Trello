@@ -13,7 +13,7 @@ const Navbar = () => {
   const { user, login, logout } = useAuth();
 
   return (
-    <nav className="p-4 flex justify-between border-b-2 border-gray-200 items-center">
+    <nav className="p-4 flex justify-between border-b-2 border-gray-200 items-center sticky z-1000">
       <NavLink to="/">
         <div className="flex items-center gap-2">
           <h1 className="text-xl font-bold text-textLogo">Trello Clone</h1>

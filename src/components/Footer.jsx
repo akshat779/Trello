@@ -6,7 +6,7 @@ import { FaInstagram } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="bg-footer h-28 w-full">
+    <footer className="bg-footer h-28 w-full  bottom-0">
       <div className="flex justify-between items-center h-16 bg-footer text-white ">
         <div className="text-3xl bg-footer text-white flex gap-2 justify-around items-center ml-4">
           <FaTrello className="text-2xl" />

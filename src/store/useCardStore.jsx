@@ -67,3 +67,73 @@ const useCardStore = create((set) => ({
 }));
 
 export default useCardStore;
+
+
+// import { create } from "zustand";
+// import { db } from "./../context/firebase";
+// import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, query, where } from "firebase/firestore";
+
+// export const useCardStore = create((set) => ({
+//   cards: {}, // { listId: [{id, title, description}] }
+  
+//   fetchCards: async (boardId) => {
+//     try {
+//       const q = query(collection(db, "cards"), where("boardId", "==", boardId));
+//       const querySnapshot = await getDocs(q);
+//       const cardMap = {};
+//       querySnapshot.forEach((doc) => {
+//         const card = { id: doc.id, ...doc.data() };
+//         if (!cardMap[card.listId]) cardMap[card.listId] = [];
+//         cardMap[card.listId].push(card);
+//       });
+//       set({ cards: cardMap });
+//     } catch (error) {
+//       console.error("Error fetching cards:", error);
+//     }
+//   },
+
+//   addCard: async (title, listId, boardId) => {
+//     try {
+//       const docRef = await addDoc(collection(db, "cards"), { title, listId, boardId });
+//       set((state) => ({
+//         cards: {
+//           ...state.cards,
+//           [listId]: [...(state.cards[listId] || []), { id: docRef.id, title, listId, boardId }],
+//         },
+//       }));
+//     } catch (error) {
+//       console.error("Error adding card:", error);
+//     }
+//   },
+
+//   updateCard: async (cardId, listId, updatedTitle) => {
+//     try {
+//       const cardRef = doc(db, "cards", cardId);
+//       await updateDoc(cardRef, { title: updatedTitle });
+//       set((state) => ({
+//         cards: {
+//           ...state.cards,
+//           [listId]: state.cards[listId].map((card) =>
+//             card.id === cardId ? { ...card, title: updatedTitle } : card
+//           ),
+//         },
+//       }));
+//     } catch (error) {
+//       console.error("Error updating card:", error);
+//     }
+//   },
+
+//   deleteCard: async (cardId, listId) => {
+//     try {
+//       await deleteDoc(doc(db, "cards", cardId));
+//       set((state) => ({
+//         cards: {
+//           ...state.cards,
+//           [listId]: state.cards[listId].filter((card) => card.id !== cardId),
+//         },
+//       }));
+//     } catch (error) {
+//       console.error("Error deleting card:", error);
+//     }
+//   },
+// }));
