@@ -3,10 +3,12 @@ import  useBoardStore  from "../store/useBoardStore";
 import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 
+
 const Board = () => {
   const { user, logout } = useAuth();
   const { boards, fetchBoards, addBoard, deleteBoard } = useBoardStore();
   const [boardTitle, setBoardTitle] = useState("");
+
 
   useEffect(() => {
     if (user) fetchBoards(user.uid);
@@ -19,8 +21,10 @@ const Board = () => {
     }
   };
 
+
   return (
     <div className="p-6">
+      
       <div className="flex justify-between">
         <h1 className="text-2xl font-bold">Your Boards</h1>
        

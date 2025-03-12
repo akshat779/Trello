@@ -3,11 +3,15 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useAuth } from '../context/AuthContext';
+import Toast from './Toast';
+
 
 export default function BasicMenu({userImage}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [toastOpen, setToastOpen] = React.useState(false);
   const open = Boolean(anchorEl);
   const {logout} = useAuth();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -15,9 +19,19 @@ export default function BasicMenu({userImage}) {
     setAnchorEl(null);
   };
   const handleLogout = () => {
+    setToastOpen(true);
     handleClose();
-    logout();
+    setTimeout(() => {
+      logout();
+    },2000)
   }
+
+  const handleToastClose = (event,reason) => {
+    if(reason === 'clickaway'){
+      return
+    }
+    setToastOpen(false);
+  };
 
   return (
     <div>
@@ -42,6 +56,9 @@ export default function BasicMenu({userImage}) {
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
+
+         <Toast open={toastOpen} setOpen={setToastOpen} message={"Logged Out"}/>
+
     </div>
   );
 }

@@ -9,19 +9,28 @@ import { useAuth } from "../context/AuthContext";
 
 const Home = () => {
   const { user } = useAuth();
+
   return (
     <>
       <Grid container spacing={2} className="h-full">
-        <Grid className="flex justify-center   align-center" size={8}>
-          <Box className="text-center  flex flex-col justify-evenly items-left">
-            <Box className="flex flex-col gap-6">
+        <Grid className="flex justify-center align-center" size={8}>
+          <Box className="text-center  flex flex-col justify-center items-left gap-8">
+            <Box className="flex flex-col gap-6 p-10 ">
               <h1 className="text-4xl font-bold text-primaryText">
                 Capture, organize, and tackle your to-dos from anywhere.
               </h1>
-              <p className="text-2xl text-primaryText font-bold">
-                Escape the clutter and chaos—unleash your productivity with
-                Trello.
-              </p>
+              <div className="flex flex-col gap-2">
+                <p className="text-2xl text-primaryText font-bold">
+                  Escape the clutter and chaos—unleash your productivity with
+                  Trello.
+                </p>
+                <p className="text-l text-primaryText font">
+                  Trello is a web-based, kanban-style, list-making application
+                  developed by Atlassian. Created in 2011 by Fog Creek Software,
+                  it was spun out to form the basis of a separate company in New
+                  York City in 2014 and sold to Atlassian in January 2017.
+                </p>
+              </div>
             </Box>
             <Box>
               {user ? (
