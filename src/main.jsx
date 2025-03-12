@@ -4,6 +4,7 @@ import { AuthProvider } from "./context/AuthContext.jsx"
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
 import Home from './pages/Home.jsx'
+import Board from './pages/Board.jsx'
 
 import './index.css'
 // import App from './App.jsx'
@@ -11,6 +12,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />}>
       <Route path='' element={<Home />} />
+      <Route path='board' element={<Board />} />
     </Route>
   )
 )

@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-    //   console.log(currentUser.photoURL)
+      console.log(currentUser)
     });
     return () => unsubscribe();
   }, []);
