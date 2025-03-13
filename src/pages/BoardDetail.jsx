@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useListStore from "../store/useListStore";
 import ListContainer from "../components/List";
+import { closestCorners, DndContext } from "@dnd-kit/core";
+import { arrayMove, horizontalListSortingStrategy, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 
 const BoardDetail = () => {
   const { id } = useParams();
@@ -26,16 +28,23 @@ const BoardDetail = () => {
     await deleteList(listId, boardId);
   };
 
-  const sortedLists = lists[id]?.slice().sort((a, b) => parseInt(a.createdAt) - parseInt(b.createdAt));
+
+  const sortedLists = lists[id]?.slice().sort((a, b) => parseInt(a.createdAt) - parseInt(b.createdAt)) || [];
+
+
 
   return (
-    <div className="mt-2 overflow-x-auto h-screen "> 
+    <div className="mt-2 overflow-x-auto h-screen ">
       <div className="flex justify-start mx-2 gap-2 min-w-max ">
+
+
         {sortedLists?.map((list) => (
           <ListContainer key={list.id} titleName={list.title} listId={list.id} boardId={id} />
         ))}
-        <div 
-        className="h-10 mt-2"
+
+
+        <div
+          className="h-10 mt-2"
           style={{
             borderRadius: '1rem',
             backgroundColor: 'rgba(128, 128, 128, 0.3)',
@@ -46,18 +55,18 @@ const BoardDetail = () => {
             alignItems: 'center'
           }}
         >
-          
-            <input
-              type="text"
-              value={listTitle}
-              onChange={(e) => setListTitle(e.target.value)}
-              placeholder="Add list title"
-              className= " px-2 py-2 rounded"
-            />
-            <button onClick={handleAddList} className="font-bold px-4 py-2 rounded ml-2">
-              Add List
-            </button>
-          
+
+          <input
+            type="text"
+            value={listTitle}
+            onChange={(e) => setListTitle(e.target.value)}
+            placeholder="Add list title"
+            className=" px-2 py-2 rounded"
+          />
+          <button onClick={handleAddList} className="font-bold px-4 py-2 rounded ml-2">
+            Add List
+          </button>
+
         </div>
       </div>
     </div>
