@@ -15,15 +15,16 @@ const useListStore = create((set) => ({
   },
 
   addList: async (title, boardId) => {
+    const createdAt = new Date();
     const docRef = await addDoc(collection(db, "lists"), {
       title,
       boardId,
-      createdAt: new Date(),
+      createdAt,
     });
     set((state) => ({
       lists: {
         ...state.lists,
-        [boardId]: [...(state.lists[boardId] || []), { id: docRef.id, title, boardId }],
+        [boardId]: [...(state.lists[boardId] || []), { id: docRef.id, title, boardId,createdAt }],
       },
     }));
   },

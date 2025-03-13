@@ -1,5 +1,76 @@
+// import { create } from "zustand";
+// import { db } from "../context/firebase";
+// import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
+
+// const useCardStore = create((set) => ({
+//   cards: {},
+
+//   fetchCards: async (boardId,listId) => {
+//     const querySnapshot = await getDocs(collection(db, "cards"));
+//     const cards = querySnapshot.docs
+//       .filter((doc) => doc.data().boardId === boardId && doc.data().listId === listId)
+//       .map((doc) => ({ id: doc.id, ...doc.data() }));
+
+//     set((state) => ({ cards: { ...state.cards, [boardId]: cards } }));
+//     return cards;
+//   },
+
+//   addCard: async (content, listId, boardId) => {
+//     const docRef = await addDoc(collection(db, "cards"), {
+//       content,
+//       listId,
+//       boardId,
+//       createdAt: new Date(),
+//     });
+
+//     set((state) => ({
+//       cards: {
+//         ...state.cards,
+//         [boardId]: [...(state.cards[boardId] || []), { id: docRef.id, content, listId, boardId }],
+//       },
+//     }));
+//   },
+
+//   deleteCard: async (cardId, boardId) => {
+//     await deleteDoc(doc(db, "cards", cardId));
+//     set((state) => ({
+//       cards: {
+//         ...state.cards,
+//         [boardId]: state.cards[boardId].filter((card) => card.id !== cardId),
+//       },
+//     }));
+//   },
+
+//   updateCardContent: async (cardId, boardId, newContent) => {
+//     await updateDoc(doc(db, "cards", cardId), { content: newContent });
+//     set((state) => ({
+//       cards: {
+//         ...state.cards,
+//         [boardId]: state.cards[boardId].map((card) =>
+//           card.id === cardId ? { ...card, content: newContent } : card
+//         ),
+//       },
+//     }));
+//   },
+
+//   moveCard: (cardId, fromListId, toListId, boardId) => {
+//     set((state) => {
+//       const card = state.cards[boardId].find((c) => c.id === cardId);
+//       if (!card) return state;
+
+//       const updatedCards = state.cards[boardId].map((c) =>
+//         c.id === cardId ? { ...c, listId: toListId } : c
+//       );
+
+//       return { cards: { ...state.cards, [boardId]: updatedCards } };
+//     });
+//   },
+// }));
+
+// export default useCardStore;
+// ________________________________
 import { create } from "zustand";
-import { db } from "../firebase";
+import { db } from "../context/firebase";
 import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
 
 const useCardStore = create((set) => ({
@@ -11,7 +82,13 @@ const useCardStore = create((set) => ({
       .filter((doc) => doc.data().boardId === boardId)
       .map((doc) => ({ id: doc.id, ...doc.data() }));
 
-    set((state) => ({ cards: { ...state.cards, [boardId]: cards } }));
+    const cardMap = cards.reduce((acc, card) => {
+      if (!acc[card.listId]) acc[card.listId] = [];
+      acc[card.listId].push(card);
+      return acc;
+    }, {});
+
+    set((state) => ({ cards: { ...state.cards, [boardId]: cardMap } }));
   },
 
   addCard: async (content, listId, boardId) => {
@@ -25,49 +102,66 @@ const useCardStore = create((set) => ({
     set((state) => ({
       cards: {
         ...state.cards,
-        [boardId]: [...(state.cards[boardId] || []), { id: docRef.id, content, listId, boardId }],
+        [boardId]: {
+          ...(state.cards[boardId] || {}),
+          [listId]: [...(state.cards[boardId]?.[listId] || []), { id: docRef.id, content, listId, boardId  }],
+        },
       },
     }));
   },
 
-  deleteCard: async (cardId, boardId) => {
+  deleteCard: async (cardId, listId, boardId) => {
     await deleteDoc(doc(db, "cards", cardId));
     set((state) => ({
       cards: {
         ...state.cards,
-        [boardId]: state.cards[boardId].filter((card) => card.id !== cardId),
+        [boardId]: {
+          ...(state.cards[boardId] || {}),
+          [listId]: state.cards[boardId][listId].filter((card) => card.id !== cardId),
+        },
       },
     }));
   },
 
-  updateCardContent: async (cardId, boardId, newContent) => {
+  updateCardContent: async (cardId, listId, boardId, newContent) => {
     await updateDoc(doc(db, "cards", cardId), { content: newContent });
     set((state) => ({
       cards: {
         ...state.cards,
-        [boardId]: state.cards[boardId].map((card) =>
-          card.id === cardId ? { ...card, content: newContent } : card
-        ),
+        [boardId]: {
+          ...(state.cards[boardId] || {}),
+          [listId]: state.cards[boardId][listId].map((card) =>
+            card.id === cardId ? { ...card, content: newContent } : card
+          ),
+        },
       },
     }));
   },
 
   moveCard: (cardId, fromListId, toListId, boardId) => {
     set((state) => {
-      const card = state.cards[boardId].find((c) => c.id === cardId);
+      const card = state.cards[boardId][fromListId].find((c) => c.id === cardId);
       if (!card) return state;
 
-      const updatedCards = state.cards[boardId].map((c) =>
-        c.id === cardId ? { ...c, listId: toListId } : c
-      );
+      const updatedFromList = state.cards[boardId][fromListId].filter((c) => c.id !== cardId);
+      const updatedToList = [...(state.cards[boardId][toListId] || []), { ...card, listId: toListId }];
 
-      return { cards: { ...state.cards, [boardId]: updatedCards } };
+      return {
+        cards: {
+          ...state.cards,
+          [boardId]: {
+            ...state.cards[boardId],
+            [fromListId]: updatedFromList,
+            [toListId]: updatedToList,
+          },
+        },
+      };
     });
   },
 }));
 
 export default useCardStore;
-
+// _______________________________
 
 // import { create } from "zustand";
 // import { db } from "./../context/firebase";
