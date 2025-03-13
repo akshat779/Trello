@@ -190,6 +190,7 @@ import { IoMdAdd } from "react-icons/io";
 import { useState, useEffect } from "react";
 import useCardStore from "../store/useCardStore";
 import useListStore from "../store/useListStore";
+import Card from "./Card";
 
 const ListContainer = ({ titleName, listId, boardId }) => {
     const { cards, fetchCards, addCard, deleteCard } = useCardStore();
@@ -213,18 +214,21 @@ const ListContainer = ({ titleName, listId, boardId }) => {
         }
     };
 
+    const sortedCards = cards[boardId]?.[listId]?.slice().sort((a, b) => parseInt(a.createdAt) - parseInt(b.createdAt));
     return (
-        
         // _____________
-        <div className="flex mt-2 flex-col h-fit items-center bg-gray-700 justify-between w-80 rounded-xl  "> 
+        <div className="flex mt-2 flex-col h-fit items-center bg-gray-700 justify-between w-80 rounded-xl  ">
 
             <div className="flex mt-2 flex-col items-center justify-start w-80 bg-gray-700 rounded-lg ">
-                <h1 className="text-gray-100 font-bold">{titleName}</h1>
-                <button onClick={() => handleDelete(listId, boardId)}><IoCloseCircleOutline className="text-white text-xl" /></button>
-                {cards[boardId]?.[listId]?.map((card) => (
-                    <div key={card.id} className="bg-white w-[90%] p-4 m-2 rounded-md">
-                        <p className="break-words">{card.content}</p>
-                    </div>
+                <div className="flex justify-between w-full px-4">
+                    <h1 className="text-gray-100 font-bold">{titleName}</h1>
+                    <button onClick={() => handleDelete(listId, boardId)}><IoCloseCircleOutline className="text-white text-xl" /></button>
+                </div>
+                {sortedCards?.map((card) => (
+                    // <div key={card.id} className="bg-white w-[90%] p-4 m-2 rounded-md">
+                    //     <p className="break-words">{card.content}</p>
+                    // </div>
+                    <Card key={card.id} cardId={card.id} title={card.content} boardId={boardId} listId={listId}/>
                 ))}
             </div>
 

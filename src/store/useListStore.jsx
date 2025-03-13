@@ -15,7 +15,7 @@ const useListStore = create((set) => ({
   },
 
   addList: async (title, boardId) => {
-    const createdAt = new Date();
+    const createdAt = parseInt(new Date().getTime());
     const docRef = await addDoc(collection(db, "lists"), {
       title,
       boardId,

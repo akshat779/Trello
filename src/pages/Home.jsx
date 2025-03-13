@@ -21,29 +21,29 @@ const Home = () => {
   return (
     <>
        
-      <Grid container spacing={2} className="h-full">
+      <Grid container spacing={2} className="h-full mb-10">
         <Grid className="flex justify-center align-center" size={8}>
           <Box className="text-center  flex flex-col justify-center items-left gap-8">
-            <Box className="flex flex-col gap-10 p-10 ">
+            <Box className="flex text-center flex-col gap-10 p-10 my-10">
               <h1 className="text-4xl font-bold text-primaryText">
-                Capture, organize, and tackle your <span className="text-5xl text-blue-900">"To-dos"</span> from anywhere.
+                Capture, organize, and tackle your <span className="text-5xl text-blue-900">"To-dos"</span> <br/> from anywhere.
               </h1>
               <div className="flex flex-col gap-8">
                 <p className="text-2xl text-primaryText font-bold">
                   Escape the clutter and chaos—unleash your productivity with
                   Trello.
                 </p>
-                <p className="text-l text-primaryText font px-15">
+                {/* <p className="text-l text-primaryText font-bold px-15">
                   Trello is a web-based, kanban-style, list-making application
                   developed by Atlassian. Created in 2011 by Fog Creek Software,
                   it was spun out to form the basis of a separate company in New
                   York City in 2014 and sold to Atlassian in January 2017.
-                </p>
+                </p> */}
               </div>
             </Box>
             <Box>
               {user ? (
-                <h1 className="text-3xl font-bold text-primaryText">{`Hi ${user?.displayName} ! 👋`}</h1>
+                <h1 className="text-4xl my-10 font-bold text-primaryText">Hi <span className="text-5xl">{user?.displayName }👋</span></h1>
               ) : (
                 <Button
                   variant="contained"
@@ -56,7 +56,7 @@ const Home = () => {
             </Box>
           </Box>
         </Grid>
-        <Grid className="text-center  " size={4}>
+        <Grid className="text-center my-10 " size={4}>
           <Box>
             <img
               src={

@@ -3,6 +3,8 @@ import  useBoardStore  from "../store/useBoardStore";
 import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import AddBoard from "../components/AddBoard";
+import { IoMdCloseCircle } from "react-icons/io";
+
 
 
 const Board = () => {
@@ -33,15 +35,23 @@ const Board = () => {
        
       </div>
 
-      
-      <div className="grid grid-cols-3 gap-4 mt-6">
+      {/* style={{ backgroundColor: board.color }} */}
+      <div className="grid grid-cols-4 gap-4 mt-6">
         {boards.map((board) => (
-          <div key={board.id} className="border p-4 rounded" style={{ backgroundColor: board.color }}>
-            <Link to={`/board/${board.id}`} className="block text-lg font-semibold">
+          <div key={board.id} className="border p-4 py-6 rounded flex justify-between items-center"
+          style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+          }} >
+            
+            <Link to={`/board/${board.id}`} className="block text-xl font-semibold">
               {board.title}
             </Link>
-            <button onClick={() => deleteBoard(board.id)} className="text-red-500 mt-2">
-              Delete
+            <button onClick={() => deleteBoard(board.id)} className="text-2xl">
+            <IoMdCloseCircle />
+
             </button>
           </div>
         ))}
