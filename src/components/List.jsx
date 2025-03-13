@@ -1,11 +1,9 @@
 import { IoCloseCircleOutline } from "react-icons/io5";
-import { IoMdAdd } from "react-icons/io";
 import { useState, useEffect } from "react";
 import useCardStore from "../store/useCardStore";
 import useListStore from "../store/useListStore";
 import Card from "./Card";
-import { useSortable } from "@dnd-kit/sortable";
-import  {CSS}  from "@dnd-kit/utilities";
+
 
 const ListContainer = ({ titleName, listId, boardId }) => {
     const { cards, fetchCards, addCard, deleteCard } = useCardStore();
@@ -14,10 +12,13 @@ const ListContainer = ({ titleName, listId, boardId }) => {
     const [editingCard, setEditingCard] = useState(null);
     const [updatedTitle, setUpdatedTitle] = useState("");
     
+    
 
     useEffect(() => {
         fetchCards(boardId);
     }, [boardId, listId]);
+
+    
 
     const handleDelete = async (listId, boardId) => {
         await deleteList(listId, boardId);
@@ -30,20 +31,23 @@ const ListContainer = ({ titleName, listId, boardId }) => {
         }
     };
 
+   
     const sortedCards = cards[boardId]?.[listId]?.slice().sort((a, b) => parseInt(a.createdAt) - parseInt(b.createdAt));
     return (
        
-        <div  className="flex mt-2 flex-col h-fit items-center bg-gray-700 justify-between w-80 rounded-xl  ">
+        <div className="flex mt-2 flex-col h-fit items-center bg-gray-700 justify-between w-80 rounded-xl  ">
 
             <div className="flex mt-2 flex-col items-center justify-start w-80 bg-gray-700 rounded-lg ">
                 <div className="flex justify-between w-full px-4">
                     <h1 className="text-gray-100 font-bold">{titleName}</h1>
                     <button onClick={() => handleDelete(listId, boardId)}><IoCloseCircleOutline className="text-white text-xl" /></button>
                 </div>
+                
                 {sortedCards?.map((card) => (
                    
                     <Card key={card.id} cardId={card.id} title={card.content} boardId={boardId} listId={listId}/>
                 ))}
+                
             </div>
 
             <div className="bg-gray-800 w-full mt-2 text-white rounded-2xl">

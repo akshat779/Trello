@@ -45,13 +45,14 @@ const Home = () => {
               {user ? (
                 <h1 className="text-4xl my-10 font-bold text-primaryText">Hi <span className="text-5xl">{user?.displayName }👋</span></h1>
               ) : (
-                <Button
-                  variant="contained"
-                  className="bg-primaryText text-white flex gap-2 justify-center items-center"
-                >
-                  Get Started
-                  <FaGoogle />
-                </Button>
+                // <Button
+                //   variant="contained"
+                //   className="bg-primaryText text-white flex gap-2 justify-center items-center"
+                // >
+                //   Get Started
+                //   <FaGoogle />
+                // </Button>
+                null
               )}
             </Box>
           </Box>
