@@ -5,13 +5,19 @@ import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "firebase
 const useListStore = create((set) => ({
   lists: {},
 
-  fetchLists: async (boardId) => {
+
+fetchLists: async (boardId) => {
     const querySnapshot = await getDocs(collection(db, "lists"));
     const lists = querySnapshot.docs
       .filter((doc) => doc.data().boardId === boardId)
       .map((doc) => ({ id: doc.id, ...doc.data() }));
-
-    set((state) => ({ lists: { ...state.lists, [boardId]: lists } }));
+  
+    set((state) => ({
+      lists: {
+        ...state.lists,
+        [boardId]: lists,
+      },
+    }));
   },
 
   addList: async (title, boardId) => {

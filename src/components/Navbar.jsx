@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const { user, login, logout } = useAuth();
-
+  console.log(user?.photoURL);
   return (
     <nav className="p-4 flex justify-between border-b-2 border-gray-200 items-center sticky z-1000">
       <NavLink to="/">

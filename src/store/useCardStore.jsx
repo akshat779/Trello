@@ -7,20 +7,26 @@ import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "firebase
 const useCardStore = create((set) => ({
   cards: {},
 
-  fetchCards: async (boardId) => {
-    const querySnapshot = await getDocs(collection(db, "cards"));
-    const cards = querySnapshot.docs
-      .filter((doc) => doc.data().boardId === boardId)
-      .map((doc) => ({ id: doc.id, ...doc.data() }));
 
-    const cardMap = cards.reduce((acc, card) => {
-      if (!acc[card.listId]) acc[card.listId] = [];
-      acc[card.listId].push(card);
-      return acc;
-    }, {});
+fetchCards: async (boardId) => {
+  const querySnapshot = await getDocs(collection(db, "cards"));
+  const cards = querySnapshot.docs
+    .filter((doc) => doc.data().boardId === boardId)
+    .map((doc) => ({ id: doc.id, ...doc.data() }));
 
-    set((state) => ({ cards: { ...state.cards, [boardId]: cardMap } }));
-  },
+  const cardMap = cards.reduce((acc, card) => {
+    if (!acc[card.listId]) acc[card.listId] = [];
+    acc[card.listId].push(card);
+    return acc;
+  }, {});
+
+  set((state) => ({
+    cards: {
+      ...state.cards,
+      [boardId]: cardMap,
+    },
+  }));
+},
 
   addCard: async (content, listId, boardId) => {
     const createdAt = parseInt(new Date().getTime());
@@ -70,26 +76,27 @@ const useCardStore = create((set) => ({
     }));
   },
 
-  moveCard: (cardId, fromListId, toListId, boardId) => {
+
+moveCard: async (cardId, fromListId, toListId, boardId) => {
     set((state) => {
-      const card = state.cards[boardId][fromListId].find((c) => c.id === cardId);
-      if (!card) return state;
-
-      const updatedFromList = state.cards[boardId][fromListId].filter((c) => c.id !== cardId);
-      const updatedToList = [...(state.cards[boardId][toListId] || []), { ...card, listId: toListId }];
-
+      const cardToMove = state.cards[boardId][fromListId].find((card) => card.id === cardId);
+      if(!cardToMove) return state;
+  
       return {
         cards: {
           ...state.cards,
           [boardId]: {
             ...state.cards[boardId],
-            [fromListId]: updatedFromList,
-            [toListId]: updatedToList,
+            [fromListId]: state.cards[boardId][fromListId].filter((card) => card.id !== cardId),
+            [toListId]: [...(state.cards[boardId][toListId] || []), cardToMove],
           },
         },
       };
     });
+    const cardDocRef = doc(db, "cards", cardId);
+    await updateDoc(cardDocRef, { listId: toListId });
   },
+
 }));
 
 export default useCardStore;

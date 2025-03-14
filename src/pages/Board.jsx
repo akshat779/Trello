@@ -45,10 +45,11 @@ const Board = () => {
             border: '1px solid rgba(255, 255, 255, 0.3)',
             boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
           }} >
-            
+
             <Link to={`/board/${board.id}`} className="block text-xl font-semibold">
               {board.title}
             </Link>
+            <div className="h-[20px] w-[20px] rounded-4xl" style={{backgroundColor: board.color}}></div>
             <button onClick={() => deleteBoard(board.id)} className="text-2xl">
             <IoMdCloseCircle />
 

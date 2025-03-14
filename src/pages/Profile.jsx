@@ -22,9 +22,15 @@ const Profile = () => {
               alt="user"
             />
           </Box>
-          <Box>
-            <h1 className="text-white">Name: {displayName}</h1>
+          <Box className="flex flex-col gap-4">
+            <Box>
+              <h1 className="text-white font-bold">Name: {displayName}</h1>
+            </Box>
+            <Box>
+              <h1 className="text-white font-bold">Email: {email}</h1>
+            </Box>
           </Box>
+
         </Box>
       </Box>
     </Box>
