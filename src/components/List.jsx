@@ -64,7 +64,7 @@ const ListContainer = ({ titleName, listId, boardId }) => {
                     placeholder="Add card content"
                     className="px-2 py-2 rounded  text-white border-white  "
                 />
-                <button onClick={() => handleAddCard(listId)} className="text-blue font-bold px-4 py-2 mr-3 rounded ml-2 cursor-pointer">
+                <button onClick={() => handleAddCard(listId)} className="text-blue font-bold px-4 py-2 mr-1 rounded ml-2 cursor-pointer">
                     Add Card
                 </button>
             </div>
