@@ -48,7 +48,7 @@ export default function AddBoard() {
 
   return (
     <div>
-      <button className="text-xl" onClick={handleOpen}>Add Board</button>
+      <button className="text-xl cursor-pointer" onClick={handleOpen}>Add Board</button>
       <Modal
         open={open}
         onClose={handleClose}

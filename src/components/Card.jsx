@@ -57,20 +57,20 @@ const Card = ({ cardId,title,boardId,listId}) => {
                 className="w-full p-2 border-b-1 border-gray-400 rounded"
               />
               <div className="flex justify-end mt-1">
-                <button onClick={handleUpdateCard} className="text-blue px-2 rounded bg-gray-200 mr-2">
+                <button onClick={handleUpdateCard} className="text-blue px-2 rounded bg-gray-200 mr-2 cursor-pointer">
                   Save
                 </button>
-                <button onClick={handleCancelEdit} className="text-red px-2 py-1 rounded bg-gray-200">
+                <button onClick={handleCancelEdit} className="text-red px-2 py-1 rounded bg-gray-200 cursor-pointer">
                   Cancel
                 </button>
               </div>
             </div>
           ) :
         (<div>
-            <button onClick={handleEditCard} className="absolute top-2 right-8 " >
+            <button onClick={handleEditCard} className="absolute top-2 right-8 cursor-pointer" >
                 <MdEdit className="text-black"/>
             </button>
-            <button onClick={() =>  handleDeleteCard(cardId, listId, boardId)} className="absolute top-2 right-2 " >
+            <button onClick={() =>  handleDeleteCard(cardId, listId, boardId)} className="absolute top-2 right-2 cursor-pointer" >
                 <IoCloseCircleOutline className="text-black"/>
             </button>
             <p  ref={setNodeRef} style={style} {...attributes} {...listeners} className="break-words mt-4 cursor-pointer">{title}</p>

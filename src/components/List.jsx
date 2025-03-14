@@ -38,7 +38,7 @@ const ListContainer = ({ titleName, listId, boardId }) => {
             <div className="flex mt-2 flex-col items-center justify-start w-80 bg-gray-700 rounded-lg ">
                 <div className="flex justify-between w-full px-4">
                     <h1 className="text-gray-100 font-bold">{titleName}</h1>
-                    <button onClick={() => handleDelete(listId, boardId)}><IoCloseCircleOutline className="text-white text-xl" /></button>
+                    <button onClick={() => handleDelete(listId, boardId)}><IoCloseCircleOutline className="text-white text-xl cursor-pointer" /></button>
                 </div>
                 <SortableContext items={cardIds} strategy={verticalListSortingStrategy}>
                     
@@ -56,7 +56,7 @@ const ListContainer = ({ titleName, listId, boardId }) => {
 
             </div>
 
-            <div className="bg-gray-800 w-full mt-2 text-white rounded-2xl">
+            <div className="bg-gray-800 flex justify-between w-full mt-2 text-white rounded-2xl">
                 <input
                     type="text"
                     value={newCardContent}
@@ -64,7 +64,7 @@ const ListContainer = ({ titleName, listId, boardId }) => {
                     placeholder="Add card content"
                     className="px-2 py-2 rounded  text-white border-white  "
                 />
-                <button onClick={() => handleAddCard(listId)} className="text-blue px-4 py-2 rounded ml-2 ">
+                <button onClick={() => handleAddCard(listId)} className="text-blue font-bold px-4 py-2 rounded ml-2 cursor-pointer">
                     Add Card
                 </button>
             </div>

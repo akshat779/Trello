@@ -100,7 +100,7 @@ const BoardDetail = () => {
             placeholder="Add list title"
             className=" px-2 py-2 rounded"
           />
-          <button onClick={handleAddList} className="font-bold px-4 py-2 rounded ml-2">
+          <button onClick={handleAddList} className="font-bold px-4 py-2 rounded cursor-pointer ml-2">
             Add List
           </button>
 
